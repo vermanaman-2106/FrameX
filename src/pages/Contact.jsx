@@ -5,6 +5,8 @@ function Contact() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null); // success | error
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -18,25 +20,24 @@ function Contact() {
     };
 
     try {
-      const response = await fetch(
-  "https://server-hn0n.onrender.com/send-email",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  }
-);
+      const response = await fetch(`${API_URL}/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setStatus("success");
         e.target.reset();
       } else {
         setStatus("error");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Form Error:", error);
       setStatus("error");
     }
 
@@ -46,7 +47,7 @@ function Contact() {
   return (
     <div className="flex items-center justify-center py-10 sm:py-16">
       <div className="w-full max-w-xl rounded-3xl border border-white/10 bg-slate-900/70 p-6 shadow-framex-soft backdrop-blur-xl sm:p-8">
-        
+
         {/* Header */}
         <div className="mb-6 space-y-2 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
@@ -70,6 +71,7 @@ function Contact() {
                 framexstudio000@gmail.com
               </span>
             </p>
+
             <p>
               <span className="text-slate-400">Phone</span>{" "}
               <span className="font-medium text-slate-100">
@@ -103,6 +105,7 @@ function Contact() {
               >
                 Name
               </label>
+
               <input
                 id="name"
                 name="name"
@@ -120,6 +123,7 @@ function Contact() {
               >
                 Email
               </label>
+
               <input
                 id="email"
                 name="email"
@@ -139,6 +143,7 @@ function Contact() {
               >
                 Phone
               </label>
+
               <input
                 id="phone"
                 name="phone"
@@ -155,6 +160,7 @@ function Contact() {
               >
                 Project details
               </label>
+
               <input
                 id="message"
                 name="message"
@@ -166,7 +172,8 @@ function Contact() {
             </div>
           </div>
 
-          {/* Status Messages */}
+          {/* Status messages */}
+
           {status === "success" && (
             <p className="text-green-400 text-sm text-center">
               ✅ Message sent successfully. Our team will contact you soon.
@@ -180,9 +187,12 @@ function Contact() {
           )}
 
           {/* Submit Button */}
+
           <div className="pt-2">
             <Button type="submit" fullWidth disabled={loading}>
-              {loading ? "Sending..." : "Submit project details"}
+              {loading
+                ? "Sending... (first request may take ~30s)"
+                : "Submit project details"}
             </Button>
           </div>
         </form>
