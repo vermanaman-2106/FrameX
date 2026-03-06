@@ -18,13 +18,16 @@ function Contact() {
     };
 
     try {
-      const response = await fetch("http://localhost:5001/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+  "https://server-hn0n.onrender.com/send-email",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  }
+);
 
       if (response.ok) {
         setStatus("success");
