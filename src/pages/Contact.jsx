@@ -5,7 +5,8 @@ function Contact() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null); // success | error
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5001";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
