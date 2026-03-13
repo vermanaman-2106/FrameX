@@ -45,6 +45,15 @@ function Home() {
         </div>
       </section>
 
+      <div className="mt-10 flex justify-center">
+  <a
+    href="/start-project"
+    className="rounded-xl bg-indigo-500 px-6 py-3 text-sm font-semibold text-white hover:bg-indigo-400 transition"
+  >
+    Start Your Project
+  </a>
+</div>
+
       {/* 3. Why choose FrameX */}
       <section className="py-20">
         <div className="mb-8 space-y-3 text-left sm:text-center">

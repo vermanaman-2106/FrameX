@@ -8,6 +8,7 @@ import PerformanceMarketing from './pages/PerformanceMarketing.jsx'
 import Portfolio from './pages/Portfolio.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
+import OnboardingForm from './pages/OnboardingForm.jsx'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/start-project" element={<OnboardingForm />} />
           </Routes>
         </div>
       </main>
